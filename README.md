@@ -11,16 +11,16 @@ This microservice is a Python-based server that generates a shopping list based 
 * Requests library (pip install requests)
 
 # Install requirements:
-bash
-Copy code
+```
 pip install -r requirements.txt
+```
 
 # Usage:
 * Start the server by running the server.py script:
 
-bash
-Copy code
+```
 python server.py
+```
 
 * The server will start listening for requests on tcp://*:5555.
 * To request a shopping list for a meal, send a JSON request containing the meal ID and available ingredients to the server using a client application.
@@ -30,8 +30,7 @@ python server.py
 # Example Client Implementation:
 Below is an example implementation of a client application in Python using ZeroMQ to communicate with the server:
 
-python
-Copy code
+```
 import zmq
 
 context = zmq.Context()
@@ -54,9 +53,7 @@ for item in response['shopping_list']:
 
 Close socket
 socket.close()
+```
 
 # Disclaimer:
 This application is for educational purposes only and should not be used in production environments without proper testing and validation. TheMealDB API usage is subject to their terms and conditions.
-
-# License:
-This project is licensed under the MIT License - see the LICENSE file for details.
