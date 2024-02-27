@@ -37,21 +37,25 @@ context = zmq.Context()
 socket = context.socket(zmq.REQ)
 socket.connect("tcp://localhost:5555")
 
-Example request data
+# Example request data
 request_data = {'meal_id': '52772', 'ingredients': ['Rice', 'Chicken', 'Onion']}
 
-Send request to server
+# Send request to server
 socket.send_json(request_data)
 
-Receive response from server
+# Receive response from server
 response = socket.recv_json()
 
-Print shopping list
-print("Shopping List:")
-for item in response['shopping_list']:
-    print(item)
+# Print shopping list
+# Check if response contains an error message
+if 'error' in response:
+    print("Error:", response['error'])
+else:
+    print("Shopping List:")
+    for item in response['shopping_list']:
+        print(item)
 
-Close socket
+# Close socket
 socket.close()
 ```
 
