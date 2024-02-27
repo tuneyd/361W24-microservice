@@ -10,18 +10,27 @@ def lookup_meal_by_id(meal_id):
     response = requests.get(url)
 
     if response.status_code == 200:
-        
         data = response.json()
         ingredients_list = []
-        count = 1
-        while True:
-            key = 'strIngredient' + str(count)
-            ingredient = data['meals'][0].get(key)
-            if ingredient and ingredient.strip() != "":
-                ingredients_list.append(ingredient)
-                count += 1
+        try:
+            meals = data.get('meals')
+            if meals:
+                meal = meals[0]
+                count = 1
+                while True:
+                    key = 'strIngredient' + str(count)
+                    ingredient = meal.get(key)
+                    if ingredient and ingredient.strip() != "":
+                        ingredients_list.append(ingredient)
+                        count += 1
+                    else:
+                        break
             else:
-                break
+                print("Error: No meal details found in the API response.")
+                return None
+        except (IndexError, KeyError):
+            print("Error: Unable to parse meal details from the API response.")
+            return None
     else:
         print("Failed to retrieve data from the API")
     
@@ -38,10 +47,14 @@ while True:
     # Lookup meal details by ID
     shopping_list = lookup_meal_by_id(meal_id)
 
-    # Iterate through ingredients and remove duplicates from meal_details
-    for ingredient in available_ingredients:
-        if ingredient in shopping_list:
-            shopping_list.remove(ingredient)
+    if shopping_list is not None:
+        # Iterate through ingredients and remove duplicates from meal_details
+        for ingredient in available_ingredients:
+            if ingredient in shopping_list:
+                shopping_list.remove(ingredient)
 
-    # Send the processed data back to Flask app
-    socket.send_json({'shopping_list': shopping_list})
+        # Send the processed data back to Flask app
+        socket.send_json({'shopping_list': shopping_list})
+    else:
+        # Send an error response back to Flask app
+        socket.send_json({'error': 'Failed to retrieve meal details. Please try again.'})
