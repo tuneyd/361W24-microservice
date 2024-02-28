@@ -1,9 +1,9 @@
-This microservice is a Python-based server that generates a shopping list based on the ingredients needed for the meal and the available ingredients provided by the user. It utilizes ZeroMQ (ZMQ) for communication between the server and the client and requests library to interact with TheMealDB API to fetch meal details.
+This microservice is a Python-based server that generates a shopping list based on the ingredients needed for the meal and the available ingredients provided by the user. It utilizes ZeroMQ (ZMQ) for communication between the server and the client and interacts with TheMealDB API to fetch meal details as JSON data.
 
 # Features:
-* Lookup Meal by ID: The application can retrieve meal details from TheMealDB API by providing the meal ID.
-* Generate Shopping List: It generates a shopping list by comparing the required ingredients for the meal with the available ingredients provided by the user.
-* Remove Duplicates: The application ensures that the shopping list does not contain duplicate ingredients.
+* The application can retrieve meal details from TheMealDB API by providing the meal_ID.
+* Generates a shopping list by comparing the required ingredients for the meal with the available ingredients provided by the user.
+* Ensures that the shopping list does not contain duplicate ingredients.
 
 # Requirements:
 * Python 3.x
