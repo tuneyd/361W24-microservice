@@ -59,7 +59,7 @@ else:
 socket.close()
 ```
 
-![UML diagram](uml_diagram.png)
+![UML diagram](uml-diagram.png)
 
 # Disclaimer:
 This application is for educational purposes only and should not be used in production environments without proper testing and validation. TheMealDB API usage is subject to their terms and conditions.
